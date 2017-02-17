@@ -1,16 +1,7 @@
 
 
-var alien = ['isk', 
-'vev',
-'xesh',
-'leth',
-'cresh',
-'dorn',
-'mern'];
-
+var alien = ['isk', 'vev', 'xesh', 'leth', 'cresh', 'dorn', 'mern'];
 var roman = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
-
-
 function getDecimal(roman) {
 	if(roman == 'I')
 		return 1;
@@ -34,7 +25,6 @@ function getDecimal(roman) {
 		return 1000;
 }
 
-
  // @TODO Implement
 function getAmountInCredits(quotation, alienNumber) {
 	let alienArray = alienNumber.split(' ');
@@ -45,12 +35,14 @@ function getAmountInCredits(quotation, alienNumber) {
 	for(var i in alienArray) {
 		if(alien.indexOf(alienArray[i]) > -1) {
 
-			if(lastNumber < getDecimal(roman[alien.indexOf(alienArray[i])])) {
-				curNumber = getDecimal(roman[alien.indexOf(alienArray[i])]) - curNumber;
+			let number = getDecimal(roman[alien.indexOf(alienArray[i])]);
+
+			if(lastNumber < number) {
+				curNumber = number - curNumber;
 			} else {
-				curNumber = getDecimal(roman[alien.indexOf(alienArray[i])]) + curNumber;
+				curNumber = number + curNumber;
 			}
-			lastNumber = getDecimal(roman[alien.indexOf(alienArray[i])]);
+			lastNumber = number;
 
 		} else {
 			return NaN;
@@ -67,3 +59,6 @@ console.log(getAmountInCredits(2, 'isk isk'));
 console.log(getAmountInCredits(3.14, 'isk isk'));
 console.log(getAmountInCredits(1.2, 'isk vev'));
 console.log(getAmountInCredits(1.2, 'isk not'));
+console.log(getAmountInCredits(2, 'isk leth'));
+console.log(getAmountInCredits(2, 'leth isk'));
+console.log(getAmountInCredits(2, 'leth vev isk'));
